@@ -1,10 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { HiOutlineBriefcase, HiOutlineDocumentText, HiOutlineUser, HiOutlineLogout, HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
+import { useTheme } from '../context/ThemeContext';
+import { HiOutlineBriefcase, HiOutlineDocumentText, HiOutlineUser, HiOutlineLogout, HiOutlineMenu, HiOutlineX, HiOutlineSun, HiOutlineMoon } from 'react-icons/hi';
 import { useState } from 'react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,6 +34,16 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-auth">
+          {/* Theme Toggle Button */}
+          <button 
+            onClick={toggleTheme} 
+            className="theme-toggle"
+            aria-label="Toggle theme"
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <HiOutlineSun size={20} /> : <HiOutlineMoon size={20} />}
+          </button>
+
           {user ? (
             <>
               <Link to="/dashboard" className="navbar-link">
@@ -56,6 +68,9 @@ const Navbar = () => {
       </div>
 
       <div className={`container navbar-mobile ${isOpen ? 'open' : ''}`}>
+        <button onClick={() => { toggleTheme(); setIsOpen(false); }} className="navbar-mobile-theme">
+          {theme === 'dark' ? <><HiOutlineSun /> Light Mode</> : <><HiOutlineMoon /> Dark Mode</>}
+        </button>
         <Link to="/jobs" onClick={() => setIsOpen(false)}>Jobs</Link>
         <Link to="/resume-builder" onClick={() => setIsOpen(false)}>Resume Builder</Link>
         {user ? (

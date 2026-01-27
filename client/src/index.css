@@ -3,8 +3,9 @@
    Plain CSS - No Tailwind
 ======================================== */
 
-/* CSS Variables */
-:root {
+/* CSS Variables - Dark Theme (Default) */
+:root,
+[data-theme="dark"] {
   --primary: #6366f1;
   --primary-hover: #4f46e5;
   --primary-light: rgba(99, 102, 241, 0.1);
@@ -29,6 +30,24 @@
   --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
   --radius: 12px;
   --radius-lg: 16px;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg-dark: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-input: #ffffff;
+
+  --border: #e2e8f0;
+  --border-light: #cbd5e1;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
 }
 
 /* Reset & Base */
@@ -537,7 +556,7 @@ select.input {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(15, 23, 42, 0.95);
+  background: var(--bg-card);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
@@ -595,6 +614,38 @@ select.input {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  transform: rotate(15deg);
+}
+
+.navbar-mobile-theme {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
 }
 
 .navbar-toggle {
